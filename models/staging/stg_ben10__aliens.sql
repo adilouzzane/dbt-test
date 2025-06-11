@@ -1,2 +1,2 @@
 
-select * from ben10_aliens
+select * from {{ source('ben10', 'ben10_aliens') }}

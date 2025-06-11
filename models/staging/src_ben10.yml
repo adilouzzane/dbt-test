@@ -1,0 +1,23 @@
+version: 2
+
+sources:
+  - name: ben10
+    database: dbt_aj2b
+    schema: dbt_adilouzzane
+    # Apply freshness on database level
+    # freshness: 
+    #   error_after: {count: 7, period: day}
+    #   warn_after: {count: 1, period: day}
+    # loaded_at_field : etl_loaded_at
+
+    tables:
+      - name: ben10_aliens
+      # Ignore freshness check for specifc tables
+        freshness: null
+      - name: ben10_battles
+        # Apply freshness on table level
+        # freshness: 
+        #   error_after: {count: 7, period: day}
+        #   warn_after: {count: 1, period: day}
+        # loaded_at_field : etl_loaded_at
+      - name: ben10_enemies

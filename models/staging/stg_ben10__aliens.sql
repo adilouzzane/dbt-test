@@ -9,8 +9,8 @@ select
     cast(intelligence as integer) as intelligence
 
 from 
-    -- {{ source('ben10', 'ben10_aliens') }}
-    ben10_aliens
+    {{ source('ben10', 'ben10_aliens') }}
+    -- ben10_aliens
 
 
 

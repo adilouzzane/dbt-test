@@ -6,7 +6,7 @@ select
     sum(CASE WHEN alien_name = winner THEN 1 ELSE 0 END) AS won_battles,
     count(distinct enemy_name) AS fought_emenies
 from 
-    -- {{ source('ben10', 'ben10_battles') }}
-    ben10_battles
+    {{ source('ben10', 'ben10_battles') }}
+    -- ben10_battles
 group by
     alien_name

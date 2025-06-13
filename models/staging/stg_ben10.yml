@@ -45,7 +45,7 @@ models:
   #               - return_pending
   #               - placed
 
-  - name: stg_ben10__battles
+  - name: stg_ben10__enemies
     columns:
       - name: alien_name
         tests:

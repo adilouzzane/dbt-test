@@ -13,7 +13,7 @@ sources:
     tables:
       - name: ben10_aliens
       # Ignore freshness check for specifc tables
-        freshness: null
+        # freshness: null
       - name: ben10_battles
         # Apply freshness on table level
         # freshness: 

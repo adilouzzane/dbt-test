@@ -1,0 +1,45 @@
+version: 2
+
+models:
+  - name: stg_ben10__aliens
+    columns: 
+      - name: alien_id
+        tests:
+          - unique
+          - not_null
+
+  - name: stg_ben10__battles
+    columns:
+      - name: alien_name
+        tests:
+          - not_null
+          - relationships:
+              to: source('ben10', 'ben10_aliens')
+              field: alien_name
+  #     - name: status
+  #       tests:
+  #         - accepted_values:
+  #             values:
+  #               - completed
+  #               - shipped
+  #               - returned
+  #               - return_pending
+  #               - placed
+
+  - name: stg_ben10__battles
+    columns:
+      - name: alien_name
+        tests:
+          - not_null
+          - relationships:
+              to: source('ben10', 'ben10_aliens')
+              field: alien_name
+  #     - name: status
+  #       tests:
+  #         - accepted_values:
+  #             values:
+  #               - completed
+  #               - shipped
+  #               - returned
+  #               - return_pending
+  #               - placed

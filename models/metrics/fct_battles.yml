@@ -16,10 +16,10 @@ semantic_models:
       - name: is_winner
         type: categorical
         expr : case when alien_name = winner then true else false end
-      - name: battle_week
+      - name: battle_day
         type: time
         type_params:
-          time_granularity: week
+          time_granularity: day
 
     measures:
       - name: first_battle

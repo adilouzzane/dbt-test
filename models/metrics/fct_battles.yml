@@ -3,8 +3,8 @@ semantic_models:
     model: ref('fct_battles')
     description: |
       battle fact table. each row consists of one battle between 2 aliens.
-    # defaults:
-    #   agg_time_dimension: battle_date
+    defaults:
+      agg_time_dimension: battle_date
 
     entities:
       - name: battle_id

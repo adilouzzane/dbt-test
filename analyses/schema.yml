@@ -1,0 +1,10 @@
+version: 2
+
+seeds:
+  - name: planets
+    description: a manual mapping of planet names
+    columns:
+      - name: planet_id
+        tests:
+          - unique
+          - not_null

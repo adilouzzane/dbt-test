@@ -1,0 +1,12 @@
+exposures:
+  - name: battles_data
+    type: dashboard
+    maturity: high
+    url: https://google.com
+    depends_on:
+      - ref('fct_battles')
+    owner:
+      name: Adil Ouzzane
+      email: test@test.test
+
+      

@@ -1,0 +1,4 @@
+entities:
+  -name: aliens
+  expr: alien_id
+  type: primary

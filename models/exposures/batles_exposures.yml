@@ -5,9 +5,8 @@ exposures:
     url: https://google.com
     depends_on:
       - ref('fct_battles')
-      # - metric('total_battles')
-      # - metric('won_battles')
-      # - metric('none')
+      - metric('total_battles')
+      - metric('won_battles')
     owner:
       name: Adil Ouzzane
       email: test@test.test

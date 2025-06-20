@@ -6,7 +6,8 @@ select
     home_planet,
     cast(strength_level as integer) as strength_level,
     cast(speed_level as integer) as speed_level,
-    cast(intelligence as integer) as intelligence
+    cast(intelligence as integer) as intelligence,
+    {{ avg_score('strength_level', 'speed_level', 'intelligence') }} as avg_score
 
 from 
     {{ source('ben10', 'ben10_aliens') }}

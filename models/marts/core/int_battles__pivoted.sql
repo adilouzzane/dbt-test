@@ -10,7 +10,7 @@ pivoted as (
     select
         alien_name,
     {% for home in home_planets %}
-        sum(case when home_planet = '{{ home }}' then 1 else 0 end) as "{{ home }}_planet" -- home|replace(" ","_")
+        sum(case when home_planet = '{{ home }}' then 1 else 0 end) as "{{ home }}_planet"
         {%- if not loop.last -%}
         ,
         {%- endif -%}

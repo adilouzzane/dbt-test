@@ -1,15 +1,21 @@
 version: 2
 
 models:
-
   - name: fct_battles
+    config:
+      contract:
+        enforced: true
     columns:
       - name: battle_id
+        data_type: integer
+        constraints:
+          - type: not_null
         description: a unique_id of a battle
         tests:
           - not_null
           - unique
       - name: alien_name
+        data_type: text
         description: the name of the Alien
         tests:
           - not_null
@@ -17,12 +23,15 @@ models:
           #     to: source('ben10', 'ben10_aliens')
           #     field: alien_name
       - name: enemy_name
+        data_type: text
         description: the name of the Enemy
         tests:
           - not_null
       - name: battle_date
+        data_type: date
         description: The data of the battle
       - name: winner
+        data_type: text
         description: The name of the Alien who won the battle
 
 semantic_models:

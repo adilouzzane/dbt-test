@@ -1,0 +1,15 @@
+unit_tests:
+  - name: test_alien_avg_score
+    description: Test the calculated average score for an alien
+    model: stg_ben10__aliens
+    given: # the mock data for your inputs
+      - input: source('ben10', 'ben10_aliens')
+        rows:
+          - {alien_id: 1, strength_level: '5', speed_level: '5', intelligence: '5'}
+          - {alien_id: 2, strength_level: '0', speed_level: '6', intelligence: '9'}
+          - {alien_id: 3, strength_level: '0', speed_level: '0', intelligence: '0'}
+    expect: # the expected output given the inputs above
+      rows:
+        - {alien_id: 1, avg_score : 5.00}
+        - {alien_id: 2, avg_score : 5.00}
+        - {alien_id: 3, avg_score : 0.00}

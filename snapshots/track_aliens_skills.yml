@@ -1,0 +1,11 @@
+snapshots:
+  - name: alients_snapshot
+    relation: source('ben10', 'ben10_aliens')
+    config:
+      schema: snapshots
+      database: dbt_aj2b
+      unique_key: alien_id
+      strategy: check
+      check_cols: ['alien_id', 'strength_level', 'speed_level', 'intelligence']
+      hard_deletes: ignore
+      dbt_valid_to_current: "to_date('9999-12-31','YYYY-MM-DD')"

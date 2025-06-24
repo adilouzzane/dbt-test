@@ -1,0 +1,22 @@
+models:
+  - name: dim_aliens
+    config:
+      contract:
+        enforced: true
+    columns:
+      - name: alien_id
+        data_type: integer
+      - name: alien_name
+        data_type: text
+      - name: fist_battle_date
+        data_type: date
+      - name: last_battle_date
+        data_type: date
+      - name: total_battles
+        data_type: bigint
+      - name: won_battles
+        data_type: bigint
+      - name: fought_emenies
+        data_type: bigint
+      - name: is_winner
+        data_type: boolean

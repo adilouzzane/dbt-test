@@ -1,0 +1,11 @@
+groups:
+  - name: aliens
+    owner:
+      name: Firstname Lastname
+      email: aliens@ben10.com
+      slack: aliens-data
+      github: aliens-data-team
+  - name: battles
+    owner:
+      email: battles@ben10.com
+      github: battles-data-team

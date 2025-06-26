@@ -1,5 +1,6 @@
 models:
   - name: dim_aliens
+    latest_version: 1
     config:
       contract:
         enforced: true
@@ -20,3 +21,23 @@ models:
         data_type: bigint
       - name: is_winner
         data_type: boolean
+    versions:
+      - v: 1
+        # config:
+        #   alias: dim_aliens
+      - v: 2
+        columns:
+          - name: strength_level
+            data_type: integer
+          - name: speed_level
+            data_type: integer
+          - name: intelligence
+            data_type: integer
+          - name: total_battles
+            data_type: integer
+          - name: won_battles
+            data_type: integer
+          - name: fought_emenies
+            data_type: integer
+          - include: all
+            # exclude: [order_total]

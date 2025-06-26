@@ -29,15 +29,15 @@ final AS (
     select
         alien_id,
         alien_name,
-        strength_level,
-        speed_level,
-        intelligence,
         fist_battle_date,
         last_battle_date,
         cast(total_battles as integer),
         cast(won_battles as integer),
         cast(fought_emenies as integer),
-        is_winner
+        is_winner,
+        cast(strength_level as integer) as strength_level,
+        cast(speed_level as integer) as speed_level,
+        cast(intelligence as integer) as intelligence
     from
         aliens
     left join battles using (alien_name)

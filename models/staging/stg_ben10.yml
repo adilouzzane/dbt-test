@@ -2,6 +2,10 @@ version: 2
 
 models:
   - name: stg_ben10__aliens
+    access: public
+    group: aliens
+    # config:
+    #   group: aliens
     description : Staged alien data. it contains basic aliens information.
                   {{ doc('ben10_aliens') }}
     columns: 
@@ -17,6 +21,10 @@ models:
           - not_null
 
   - name: stg_ben10__battles
+    access: protected
+    group: battles
+    # config:
+    #   group: battles
     columns:
       - name: alien_name
         tests:

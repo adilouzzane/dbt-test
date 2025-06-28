@@ -1,51 +1,64 @@
 -- Import CTE
 with orders as (
-    select * from {{ source('jaffle_shop', 'orders') }}
+    select
+        "ID" as order_id,
+        "USER_ID" as customer_id,
+        "ORDER_DATE" as order_date,
+        "STATUS" as order_status
+    from {{ source('jaffle_shop', 'orders') }}
 ),
 
 customers as (
-    select * from {{ source('jaffle_shop', 'customers') }}
+    select
+        "ID" as customer_id,
+        "FIRST_NAME" as first_name,
+        "LAST_NAME" as last_name
+    from {{ source('jaffle_shop', 'customers') }}
 ),
 
-payment as (
-    select * from {{ source('stripe', 'payment') }}
+success_payment as (
+    select
+        "ORDERID" as order_id,
+        "CREATED" as payment_creation_date,
+        cast("AMOUNT" as integer) as payment_amount
+    from {{ source('stripe', 'payment') }}
+    where "STATUS" <> 'fail'
 ),
 
 -- Logic CTE
 
-success_paied_orders as (
+success_paid_orders as (
     select
-        "ORDERID" as order_id,
-        max("CREATED") as payment_finalized_date,
-        sum(cast("AMOUNT" as integer)) / 100.0 as total_amount_paid
-    from payment
-    where "STATUS" <> 'fail'
+        order_id,
+        max(payment_creation_date) as payment_finalized_date,
+        sum(payment_amount) / 100.0 as total_amount_paid
+    from success_payment
     group by 1
 ),
 
 paid_orders as (
     select
-        orders."ID" as order_id,
-        orders."USER_ID" as customer_id,
-        orders."ORDER_DATE" as order_placed_at,
-        orders."STATUS" as order_status,
-        p.total_amount_paid,
-        p.payment_finalized_date,
-        c."FIRST_NAME" as customer_first_name,
-        c."LAST_NAME" as customer_last_name
+        orders.order_id,
+        orders.customer_id,
+        orders.order_date,
+        orders.order_status,
+        total_amount_paid,
+        payment_finalized_date,
+        first_name,
+        last_name
     from orders
-    left join success_paied_orders p on orders."ID" = p.order_id
-    left join customers c on orders."USER_ID" = c."ID"
+    left join success_paid_orders on orders.order_id = success_paid_orders.order_id
+    left join customers on orders.customer_id = customers.customer_id
 ),
 
 customer_orders as (
     select
-        c."ID" as customer_id,
-        min("ORDER_DATE") as first_order_date,
-        max("ORDER_DATE") as most_recent_order_date,
-        count(orders."ID") as number_of_orders
-    from customers c
-    left join orders on orders."USER_ID" = c."ID"
+        customers.customer_id as customer_id,
+        min("order_date") as first_order_date,
+        max("order_date") as most_recent_order_date,
+        count(order_id) as number_of_orders
+    from customers
+    left join orders on orders.customer_id = customers.customer_id
     group by 1
 ),
 
@@ -68,7 +81,7 @@ select
         partition by customer_id order by p.order_id
     ) as customer_sales_seq,
     case
-        when c.first_order_date = p.order_placed_at then 'new' else 'return'
+        when c.first_order_date = p.order_date then 'new' else 'return'
     end as nvsr,
     x.clv_bad as customer_lifetime_value,
     c.first_order_date as fdos

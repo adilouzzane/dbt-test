@@ -7,3 +7,5 @@ packages:
   #   revision: main
   - package: dbt-labs/audit_helper
     version: 0.12.1
+  - package: tnightengale/dbt_meta_testing
+    version: 0.3.6

@@ -39,10 +39,18 @@ vars:
 
 models:
   ben10_project:
-    # Applies to all files under models/example/
-    # example:
-    #   +materialized: table
+
+    # Global test to perform parimary key test (dbt run-operation required_tests to check)
+    +required_docs: true
+    # +required_tests: {"unique.*|not_null": 2}
+
+    marts:
+      # Global test to check relationship tests in marts models (dbt run-operation required_tests to check)
+      # +required_tests: {"relationship": 1}
+
+      # Materialization of models in marts
+      +materialized: table
+
     staging:
       +materialized: view
-    marts:
-      +materialized: table
+    
